@@ -1,0 +1,12 @@
+from task1.models import Buyer, Game
+Buyer.objects.create(name='Ilya', balance=1500.05, age=24)
+Buyer.objects.create(name='Terminator2000', balance=42, age=50)
+Buyer.objects.create(name='Antoshka', balance=2, age=10)
+Game.objects.create(title='The witcher 3', cost=25, size=51.2, description='Legendary game, which must playing everyone')
+Game.objects.create(title='Mario', cost=5, size=0.5, description='Old game', age_limited=False)
+Game.objects.create(title='Red Dead Redemption 2', cost=50, size=80, description='Adventure western', age_limited=True)
+first_buyer, second_buyer = Buyer.objects.filter(age__gt=18)
+Game.objects.get(id=1).buyer.set((first_buyer, second_buyer))
+Game.objects.get(id=2).buyer.set((first_buyer, Buyer.objects.get(id=3)))
+Game.objects.get(id=3).buyer.set((first_buyer, second_buyer))
+
